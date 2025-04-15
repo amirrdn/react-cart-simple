@@ -2,6 +2,14 @@
 
 Proyek frontend ini dibangun menggunakan React, TypeScript, dan Vite dengan berbagai fitur modern dan dependensi yang powerful.
 
+## 🔗 Demo & Kredensial
+
+Demo: [https://react-cart-simple.vercel.app/](https://react-cart-simple.vercel.app/)
+
+Kredensial Login:
+- Email: john@example.com
+- Password: password123
+
 ## 🚀 Teknologi Utama
 
 - React 18
