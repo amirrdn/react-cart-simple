@@ -39,12 +39,12 @@ const ProductManagement: React.FC = () => {
 
   const fetchProducts = useCallback(async () => {
     try {
-      const response = await axios.get('http://localhost:4000/barang', {
+      const response = await axios.get('https://node-typeorm-simple-cart-production.up.railway.app/barang', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-      setProducts(response.data.data);
+      setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
       message.error('Gagal mengambil data produk');
@@ -73,7 +73,7 @@ const ProductManagement: React.FC = () => {
       render: (image_url: string) => (
         image_url ? (
           <img 
-            src={`http://localhost:4000/uploads/${image_url}`} 
+            src={`https://node-typeorm-simple-cart-production.up.railway.app/uploads/${image_url}`} 
             alt="Produk" 
             style={{ width: 100, height: 100, objectFit: 'cover' }}
           />
@@ -129,8 +129,8 @@ const ProductManagement: React.FC = () => {
         uid: '-1',
         name: record.gambar,
         status: 'done',
-        url: `http://localhost:4000/uploads/${record.gambar}`,
-        thumbUrl: `http://localhost:4000/uploads/${record.gambar}`,
+        url: `https://node-typeorm-simple-cart-production.up.railway.app/uploads/${record.gambar}`,
+        thumbUrl: `https://node-typeorm-simple-cart-production.up.railway.app/uploads/${record.gambar}`,
         type: 'image/jpeg',
       }] : undefined
     };
@@ -140,7 +140,11 @@ const ProductManagement: React.FC = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`/barang/${id}`);
+      await axios.delete(`https://node-typeorm-simple-cart-production.up.railway.app/barang/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       message.success('Produk berhasil dihapus');
       fetchProducts();
     } catch {
@@ -155,11 +159,11 @@ const ProductManagement: React.FC = () => {
       formData.append('harga', values.harga.toString());
       formData.append('stock', values.stock.toString());
       if (values.gambar && values.gambar[0]?.originFileObj) {
-        formData.append('gambar', values.gambar[0].originFileObj);
+        formData.append('file', values.gambar[0].originFileObj);
       }
 
       if (editingId) {
-        await axios.put(`http://localhost:4000/barang/${editingId}`, formData, {
+        await axios.put(`https://node-typeorm-simple-cart-production.up.railway.app/barang/${editingId}`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
@@ -167,7 +171,7 @@ const ProductManagement: React.FC = () => {
         });
         message.success('Produk berhasil diperbarui');
       } else {
-        await axios.post('http://localhost:4000/barang', formData, {
+        await axios.post('https://node-typeorm-simple-cart-production.up.railway.app/barang', formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',

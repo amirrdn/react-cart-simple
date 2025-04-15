@@ -29,17 +29,16 @@ const ProductCatalog: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(token)
     if (!token) return;
     
-    axios.get('http://localhost:4000/barang', {
+    axios.get('https://node-typeorm-simple-cart-production.up.railway.app/barang', {
       headers: { 
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
       }
     }).then(res => {
       if (res.data) {
-        setBarang(res.data.data);
+        setBarang(res.data);
       }
     }).catch(error => {
       if (error.response?.status === 401) {
@@ -97,7 +96,7 @@ const ProductCatalog: React.FC = () => {
               <CardMedia
                 component="img"
                 height="200"
-                image={`http://localhost:4000/uploads/${product.gambar}`}
+                image={`https://node-typeorm-simple-cart-production.up.railway.app/uploads/${product.gambar}`}
                 alt={product.nama}
                 sx={{ objectFit: 'cover' }}
               />

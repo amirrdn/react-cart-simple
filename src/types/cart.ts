@@ -32,20 +32,20 @@ export enum MetodePembayaran {
 export interface Pembayaran {
     id: number;
     metode_pembayaran: string;
-    totalBayar: number;
-    buktiPembayaran?: string;
-    waktuPembayaran: Date;
+    jumlah_pembayaran: number;
+    created_at: Date;
+    catatan: string;
     status_pembayaran: string;
 }
 
 export interface Transaksi {
     id?: number;
     user_id: number;
-    kodeTransaksi: string;
-    createdAt: Date;
-    totalHarga: number;
+    kode_transaksi: string;
+    created_at: Date;
+    total_harga: number;
     status: 'pending' | 'dibayar' | 'diproses' | 'dikirim' | 'selesai' | 'dibatalkan';
     catatan?: string;
-    detail_transaksi: CartItem[];
+    details: CartItem[];
     pembayaran?: Pembayaran;
 } 

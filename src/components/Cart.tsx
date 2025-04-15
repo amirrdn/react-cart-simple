@@ -71,7 +71,7 @@ const Cart: React.FC<CartProps> = ({ userId }) => {
             };
             
             const response = await axios.post(
-                'http://localhost:4000/transaksi',
+                'https://node-typeorm-simple-cart-production.up.railway.app/transaksi',
                 transaksi,
                 {
                     headers: {
@@ -128,7 +128,7 @@ const Cart: React.FC<CartProps> = ({ userId }) => {
                                     onChange={() => handleSelectItem(item.barang_id)}
                                 />
                                 <img
-                                    src={`http://localhost:4000/uploads/${item.gambar}`}
+                                    src={`https://node-typeorm-simple-cart-production.up.railway.app/uploads/${item.gambar}`}
                                     alt={item.nama_barang}
                                     className="w-20 h-20 object-cover ml-4"
                                 />

@@ -11,7 +11,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post('http://localhost:4000/auth/login', { email, password });
+      const res = await axios.post('https://node-typeorm-simple-cart-production.up.railway.app/auth/login', { email, password });
       console.log(res.data.data)
       login(res.data.data.user, res.data.data.token);
       navigate('/dashboard');

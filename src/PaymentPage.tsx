@@ -58,7 +58,7 @@ const PaymentPage = () => {
   useEffect(() => {
     const fetchTransaction = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/transaksi/${transaksiId}`, {
+        const response = await axios.get(`https://node-typeorm-simple-cart-production.up.railway.app/transaksi/${transaksiId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTransaction(response.data);
@@ -80,7 +80,7 @@ const PaymentPage = () => {
 
     try {
         await axios.post(
-            `http://localhost:4000/pembayaran`,
+            `https://node-typeorm-simple-cart-production.up.railway.app/pembayaran`,
             { 
                 metode_pembayaran: selectedMethod,
                 transaksi_id: transaksiId 

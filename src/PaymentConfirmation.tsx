@@ -20,7 +20,7 @@ const PaymentConfirmation = () => {
     const fetchPaymentDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/transaksi/${transaksiId}/payment-details`,
+          `https://node-typeorm-simple-cart-production.up.railway.app/transaksi/${transaksiId}/payment-details`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setPaymentDetails(response.data.data);

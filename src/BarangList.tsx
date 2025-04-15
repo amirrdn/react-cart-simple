@@ -37,7 +37,7 @@ export default function BarangList() {
       return;
     }
     
-    axios.get('http://localhost:4000/barang', {
+    axios.get('https://node-typeorm-simple-cart-production.up.railway.app/barang', {
       headers: { 
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
@@ -70,14 +70,14 @@ export default function BarangList() {
       }
 
       if (editingId) {
-        await axios.put(`http://localhost:4000/barang/${editingId}`, formDataToSend, {
+        await axios.put(`https://node-typeorm-simple-cart-production.up.railway.app/barang/${editingId}`, formDataToSend, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
           }
         });
       } else {
-        await axios.post('http://localhost:4000/barang', formDataToSend, {
+        await axios.post('https://node-typeorm-simple-cart-production.up.railway.app/barang', formDataToSend, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
@@ -85,7 +85,7 @@ export default function BarangList() {
         });
       }
       
-      const res = await axios.get('http://localhost:4000/barang', {
+      const res = await axios.get('https://node-typeorm-simple-cart-production.up.railway.app/barang', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBarang(res.data.data);
@@ -100,11 +100,11 @@ export default function BarangList() {
     if (!window.confirm('Yakin ingin menghapus barang ini?')) return;
     
     try {
-      await axios.delete(`http://localhost:4000/barang/${id}`, {
+      await axios.delete(`https://node-typeorm-simple-cart-production.up.railway.app/barang/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
-      const res = await axios.get('http://localhost:4000/barang', {
+      const res = await axios.get('https://node-typeorm-simple-cart-production.up.railway.app/barang', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBarang(res.data.data);
@@ -146,7 +146,7 @@ export default function BarangList() {
       name: 'Gambar',
       cell: (row: Barang) => (
         <img 
-          src={`http://localhost:4000/uploads/${row.gambar}`} 
+          src={`https://node-typeorm-simple-cart-production.up.railway.app/uploads/${row.gambar}`} 
           alt={row.nama}
           className="w-16 h-16 object-cover rounded"
         />

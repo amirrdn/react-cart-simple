@@ -30,7 +30,7 @@ const PurchaseHistory = () => {
 
   const fetchTransactions = useCallback(async () => {
     try {
-      const response = await axios.get('http://localhost:4000/transaksi', {
+      const response = await axios.get('https://node-typeorm-simple-cart-production.up.railway.app/transaksi', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -49,7 +49,7 @@ const PurchaseHistory = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:4000/transaksi/${id}`, {
+      await axios.delete(`https://node-typeorm-simple-cart-production.up.railway.app/transaksi/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -71,10 +71,10 @@ const PurchaseHistory = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Riwayat Belanja</h1>
       <div className="space-y-4">
-        {transactions.map((transaction) => (
+        {transactions && transactions.map((transaction) => (
           <div key={transaction.id} className="border rounded-lg p-4 shadow-sm">
             <div className="flex justify-between items-center mb-2">
-              <span className="font-semibold">Kode: {transaction.kodeTransaksi}</span>
+              <span className="font-semibold">Kode: {transaction.kode_transaksi}</span>
               <div className="flex items-center gap-2">
                 <span className={`px-3 py-1 rounded-full text-sm ${
                   transaction.status === 'selesai' ? 'bg-green-100 text-green-800' :
@@ -102,7 +102,7 @@ const PurchaseHistory = () => {
               </div>
             </div>
             <div className="text-sm text-gray-600">
-              Tanggal: {new Date(transaction.createdAt).toLocaleDateString('id-ID')}
+              Tanggal: {new Date(transaction.created_at).toLocaleDateString('id-ID')}
             </div>
             <div className="mt-2 text-sm">
               <div className="flex space-x-4">
@@ -127,10 +127,10 @@ const PurchaseHistory = () => {
             </div>
             <div className="mt-2">
               <div className="font-medium">Detail Barang:</div>
-              {transaction.detail_transaksi.map((item, index) => (
+              {transaction.details.map((item, index) => (
                 <div key={index} className="ml-4 mt-1 flex items-center space-x-4">
                   <img 
-                    src={`http://localhost:4000/uploads/${item.barang?.gambar}`}
+                    src={`https://node-typeorm-simple-cart-production.up.railway.app/uploads/${item.barang?.gambar}`}
                     alt={item.barang?.nama}
                     className="w-16 h-16 object-cover rounded"
                   />
@@ -152,7 +152,7 @@ const PurchaseHistory = () => {
                 currency: 'IDR',
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 0
-              }).format(transaction.totalHarga || 0).replace('IDR', '')}
+              }).format(transaction.total_harga || 0).replace('IDR', '')}
             </div>
           </div>
         ))}
