@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useStore } from './store/store';
 import { BanknotesIcon, QrCodeIcon, CreditCardIcon } from '@heroicons/react/24/outline';
 import { MetodePembayaran } from './constants/payment';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 interface PaymentMethod {
   id: MetodePembayaran;
@@ -58,7 +59,7 @@ const PaymentPage = () => {
   useEffect(() => {
     const fetchTransaction = async () => {
       try {
-        const response = await axios.get(`https://node-typeorm-simple-cart-production.up.railway.app/transaksi/${transaksiId}`, {
+        const response = await axios.get(`${apiUrl}/transaksi/${transaksiId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTransaction(response.data);
@@ -80,7 +81,7 @@ const PaymentPage = () => {
 
     try {
         await axios.post(
-            `https://node-typeorm-simple-cart-production.up.railway.app/pembayaran`,
+            `${apiUrl}/pembayaran`,
             { 
                 metode_pembayaran: selectedMethod,
                 transaksi_id: transaksiId 

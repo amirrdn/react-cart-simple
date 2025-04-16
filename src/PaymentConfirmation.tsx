@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useStore } from './store/store';
+const apiUrl = import.meta.env.VITE_API_URL;
+
 
 interface PaymentDetails {
   virtualAccount: string;
@@ -20,7 +22,7 @@ const PaymentConfirmation = () => {
     const fetchPaymentDetails = async () => {
       try {
         const response = await axios.get(
-          `https://node-typeorm-simple-cart-production.up.railway.app/transaksi/${transaksiId}/payment-details`,
+          `${apiUrl}/transaksi/${transaksiId}/payment-details`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setPaymentDetails(response.data.data);

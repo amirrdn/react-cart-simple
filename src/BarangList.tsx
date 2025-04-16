@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from './store/cartSlice';
 import { message } from 'antd';
 import { useNavigate } from 'react-router-dom';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 interface BarangForm {
   nama: string;
@@ -37,7 +38,7 @@ export default function BarangList() {
       return;
     }
     
-    axios.get('https://node-typeorm-simple-cart-production.up.railway.app/barang', {
+    axios.get(`${apiUrl}/barang`, {
       headers: { 
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
@@ -70,14 +71,14 @@ export default function BarangList() {
       }
 
       if (editingId) {
-        await axios.put(`https://node-typeorm-simple-cart-production.up.railway.app/barang/${editingId}`, formDataToSend, {
+        await axios.put(`${apiUrl}/barang/${editingId}`, formDataToSend, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
           }
         });
       } else {
-        await axios.post('https://node-typeorm-simple-cart-production.up.railway.app/barang', formDataToSend, {
+        await axios.post(`${apiUrl}/barang`, formDataToSend, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
@@ -85,7 +86,7 @@ export default function BarangList() {
         });
       }
       
-      const res = await axios.get('https://node-typeorm-simple-cart-production.up.railway.app/barang', {
+      const res = await axios.get(`${apiUrl}/barang`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBarang(res.data.data);
@@ -100,11 +101,11 @@ export default function BarangList() {
     if (!window.confirm('Yakin ingin menghapus barang ini?')) return;
     
     try {
-      await axios.delete(`https://node-typeorm-simple-cart-production.up.railway.app/barang/${id}`, {
+      await axios.delete(`${apiUrl}/barang/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
-      const res = await axios.get('https://node-typeorm-simple-cart-production.up.railway.app/barang', {
+      const res = await axios.get(`${apiUrl}/barang`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBarang(res.data.data);
@@ -146,7 +147,7 @@ export default function BarangList() {
       name: 'Gambar',
       cell: (row: Barang) => (
         <img 
-          src={`https://node-typeorm-simple-cart-production.up.railway.app/uploads/${row.gambar}`} 
+          src={`${apiUrl}/uploads/${row.gambar}`} 
           alt={row.nama}
           className="w-16 h-16 object-cover rounded"
         />

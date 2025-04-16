@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useStore } from './store/store';
 import { useNavigate } from 'react-router-dom';
 
+const apiuri = import.meta.env.VITE_API_URL;
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +13,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post('https://node-typeorm-simple-cart-production.up.railway.app/auth/login', { email, password });
+      const res = await axios.post(`${apiuri}/auth/login`, { email, password });
       console.log(res.data.data)
       login(res.data.data.user, res.data.data.token);
       navigate('/dashboard');

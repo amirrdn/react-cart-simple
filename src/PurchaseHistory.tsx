@@ -4,6 +4,7 @@ import { Transaksi } from './types/cart';
 import { useStore } from './store/store';
 import { useNavigate } from 'react-router-dom';
 import { BanknotesIcon, QrCodeIcon, CreditCardIcon } from '@heroicons/react/24/outline';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const getPaymentIcon = (metodePembayaran: string | undefined) => {
   if (!metodePembayaran) return null;
@@ -30,7 +31,7 @@ const PurchaseHistory = () => {
 
   const fetchTransactions = useCallback(async () => {
     try {
-      const response = await axios.get('https://node-typeorm-simple-cart-production.up.railway.app/transaksi', {
+      const response = await axios.get(`${apiUrl}/transaksi`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -43,13 +44,13 @@ const PurchaseHistory = () => {
     }
   }, [token]);
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = useCallback(async (id: number) => {
     if (!window.confirm('Apakah Anda yakin ingin menghapus riwayat transaksi ini?')) {
       return;
     }
 
     try {
-      await axios.delete(`https://node-typeorm-simple-cart-production.up.railway.app/transaksi/${id}`, {
+      await axios.delete(`${apiUrl}/transaksi/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -58,7 +59,7 @@ const PurchaseHistory = () => {
     } catch {
       setError('Gagal menghapus riwayat transaksi');
     }
-  };
+  }, [token, fetchTransactions]);
 
   useEffect(() => {
     fetchTransactions();
@@ -130,7 +131,7 @@ const PurchaseHistory = () => {
               {transaction.details.map((item, index) => (
                 <div key={index} className="ml-4 mt-1 flex items-center space-x-4">
                   <img 
-                    src={`https://node-typeorm-simple-cart-production.up.railway.app/uploads/${item.barang?.gambar}`}
+                    src={`${apiUrl}/uploads/${item.barang?.gambar}`}
                     alt={item.barang?.nama}
                     className="w-16 h-16 object-cover rounded"
                   />

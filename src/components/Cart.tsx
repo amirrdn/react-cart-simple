@@ -14,6 +14,7 @@ import { RootState } from '../store/reduxStore';
 import { removeFromCart, updateCartItemQuantity } from '../store/cartSlice';
 import axios from 'axios';
 import useStore from '../store';
+const API_URL = import.meta.env.VITE_API_URL;
 
 interface CartProps {
     userId: number;
@@ -71,7 +72,7 @@ const Cart: React.FC<CartProps> = ({ userId }) => {
             };
             
             const response = await axios.post(
-                'https://node-typeorm-simple-cart-production.up.railway.app/transaksi',
+                `${API_URL}/transaksi`,
                 transaksi,
                 {
                     headers: {
@@ -128,7 +129,7 @@ const Cart: React.FC<CartProps> = ({ userId }) => {
                                     onChange={() => handleSelectItem(item.barang_id)}
                                 />
                                 <img
-                                    src={`https://node-typeorm-simple-cart-production.up.railway.app/uploads/${item.gambar}`}
+                                    src={`${API_URL}/uploads/${item.gambar}`}
                                     alt={item.nama_barang}
                                     className="w-20 h-20 object-cover ml-4"
                                 />

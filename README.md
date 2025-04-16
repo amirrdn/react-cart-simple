@@ -89,6 +89,19 @@ Proyek ini menggunakan beberapa file konfigurasi penting:
 - `postcss.config.js` - Konfigurasi PostCSS
 - `eslint.config.js` - Konfigurasi ESLint
 
+## 🌱 Konfigurasi Environment
+
+Aplikasi ini menggunakan environment variable untuk mengatur beberapa konfigurasi penting. Buat file `.env` di root direktori proyek Anda dan tambahkan variabel berikut sesuai kebutuhan:
+
+```env
+VITE_API_URL=https://api.example.com
+```
+
+> **Catatan:**  
+> Semua variabel yang digunakan di sisi frontend harus diawali dengan `VITE_` agar bisa diakses oleh Vite.
+
+Pastikan untuk tidak membagikan file `.env` ke publik atau memasukkannya ke dalam version control.
+
 ## 📚 Fitur Utama
 
 - ⚡️ Vite sebagai build tool yang super cepat

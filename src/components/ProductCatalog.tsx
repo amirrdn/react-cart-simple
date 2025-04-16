@@ -7,6 +7,8 @@ import axios from 'axios';
 import { message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
+const apiuri = import.meta.env.VITE_API_URL;
+
 interface Product {
   id: number;
   nama: string;
@@ -31,7 +33,7 @@ const ProductCatalog: React.FC = () => {
   useEffect(() => {
     if (!token) return;
     
-    axios.get('https://node-typeorm-simple-cart-production.up.railway.app/barang', {
+    axios.get(`${apiuri}/barang`, {
       headers: { 
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
@@ -96,7 +98,7 @@ const ProductCatalog: React.FC = () => {
               <CardMedia
                 component="img"
                 height="200"
-                image={`https://node-typeorm-simple-cart-production.up.railway.app/uploads/${product.gambar}`}
+                image={`${apiuri}/uploads/${product.gambar}`}
                 alt={product.nama}
                 sx={{ objectFit: 'cover' }}
               />
