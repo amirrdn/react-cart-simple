@@ -18,7 +18,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-100">
         <Navbar user={user} />
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 mt-16">
           <Routes>
             <Route path="/barang" element={<ProductCatalog />} />
             <Route 
