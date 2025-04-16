@@ -192,7 +192,7 @@ const ProductManagement: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px', maxWidth: 1200, margin: '0 auto' }}>
+    <div className="p-2 sm:p-6 max-w-[1200px] mx-auto">
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={12} lg={8}>
           <Button

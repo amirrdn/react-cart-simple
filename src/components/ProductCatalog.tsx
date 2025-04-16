@@ -79,8 +79,8 @@ const ProductCatalog: React.FC = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, padding: 2 }}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <Box sx={{ flexGrow: 1, padding: { xs: 1, sm: 2 } }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
         {barang.map((product) => (
           <div key={product.id}>
             <Card 
