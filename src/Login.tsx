@@ -14,8 +14,7 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       const res = await axios.post(`${apiuri}/auth/login`, { email, password });
-      console.log(res.data.data)
-      login(res.data.data.user, res.data.data.token);
+      login(res.data.data.user, res.data.data.accessToken, res.data.data.refreshToken);
       navigate('/dashboard');
     } catch (error) {
       console.error('Login failed:', error);
