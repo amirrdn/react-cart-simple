@@ -109,7 +109,7 @@ const Cart: React.FC<CartProps> = ({ userId }) => {
     }
 
     return (
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto px-2">
             <Card className="mb-4">
                 <div className="flex items-center mb-4">
                     <Checkbox
@@ -123,28 +123,29 @@ const Cart: React.FC<CartProps> = ({ userId }) => {
                 <div className="space-y-4">
                     {cartItems.map((item) => (
                         <Card key={item.barang_id} className="shadow-sm">
-                            <div className="flex items-center">
+                            <div className="flex flex-col md:flex-row items-center">
                                 <Checkbox
                                     checked={selectedItems.includes(item.barang_id)}
                                     onChange={() => handleSelectItem(item.barang_id)}
+                                    className="mb-2 md:mb-0"
                                 />
                                 <img
                                     src={`${API_URL}/uploads/${item.gambar}`}
                                     alt={item.nama_barang}
-                                    className="w-20 h-20 object-cover ml-4"
+                                    className="w-16 h-16 md:w-20 md:h-20 object-cover ml-0 md:ml-4"
                                 />
-                                <div className="flex-grow ml-4">
-                                    <h3 className="text-lg font-medium">{item.nama_barang}</h3>
+                                <div className="flex-grow ml-0 md:ml-4 mt-2 md:mt-0 text-center md:text-left">
+                                    <h3 className="text-base md:text-lg font-medium">{item.nama_barang}</h3>
                                     <p className="text-red-500 font-medium">
                                         Rp {item.harga_satuan.toLocaleString('id-ID')}
                                     </p>
                                 </div>
-                                <Space>
+                                <Space className="mt-2 md:mt-0">
                                     <InputNumber
                                         min={1}
                                         value={item.jumlah}
                                         onChange={(value) => handleQuantityChange(item.barang_id, value || 1)}
-                                        className="w-20"
+                                        className="w-16 md:w-20"
                                     />
                                     <Button
                                         type="text"
@@ -159,19 +160,19 @@ const Cart: React.FC<CartProps> = ({ userId }) => {
                 </div>
             </Card>
 
-            <Card className="fixed bottom-0 left-0 right-0 z-10 shadow-lg">
-                <div className="flex items-center justify-between">
-                    <div>
+            <Card className="fixed bottom-0 left-0 right-0 z-10 shadow-lg md:static md:shadow-none">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="w-full md:w-auto">
                         <Input.TextArea
                             value={catatan}
                             onChange={(e) => setCatatan(e.target.value)}
                             placeholder="Catatan untuk pesanan (opsional)"
-                            className="w-64"
+                            className="w-full md:w-64"
                             autoSize={{ minRows: 1, maxRows: 3 }}
                         />
                     </div>
-                    <div className="flex items-center">
-                        <div className="mr-8">
+                    <div className="flex flex-col md:flex-row items-center w-full md:w-auto">
+                        <div className="mr-0 md:mr-8 mb-2 md:mb-0 text-center md:text-left">
                             <span className="text-gray-600">Total:</span>
                             <span className="text-xl font-bold text-red-500 ml-2">
                                 Rp {calculateTotal().toLocaleString('id-ID')}
@@ -183,7 +184,7 @@ const Cart: React.FC<CartProps> = ({ userId }) => {
                             loading={loading}
                             onClick={handleCheckout}
                             disabled={selectedItems.length === 0}
-                            className="bg-red-500 hover:bg-red-600"
+                            className="bg-red-500 hover:bg-red-600 w-full md:w-auto"
                         >
                             Checkout ({selectedItems.length} item)
                         </Button>

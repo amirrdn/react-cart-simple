@@ -9,7 +9,9 @@ import {
   message,
   Popconfirm,
   Space,
-  Upload
+  Upload,
+  Row,
+  Col
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -190,27 +192,44 @@ const ProductManagement: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px' }}>
-      <div style={{ marginBottom: '16px' }}>
-        <Button
-          type="primary"
-          onClick={() => {
-            setEditingId(null);
-            form.resetFields();
-            setIsModalVisible(true);
-          }}
-        >
-          Tambah Produk Baru
-        </Button>
-      </div>
+    <div style={{ padding: '24px', maxWidth: 1200, margin: '0 auto' }}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={24} md={12} lg={8}>
+          <Button
+            type="primary"
+            style={{ width: '100%', marginBottom: 16 }}
+            onClick={() => {
+              setEditingId(null);
+              form.resetFields();
+              setIsModalVisible(true);
+            }}
+          >
+            Tambah Produk Baru
+          </Button>
+        </Col>
+      </Row>
 
-      <Table columns={columns} dataSource={products} rowKey="id" />
+      <Row>
+        <Col span={24}>
+          <Table
+            columns={columns}
+            dataSource={products}
+            rowKey="id"
+            scroll={{ x: 600 }}
+            pagination={{ pageSize: 5, responsive: true }}
+            style={{ width: '100%' }}
+          />
+        </Col>
+      </Row>
 
       <Modal
         title={editingId ? 'Edit Produk' : 'Tambah Produk Baru'}
         open={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
+        width={400}
+        style={{ top: 20 }}
+        bodyStyle={{ padding: 16 }}
       >
         <Form
           form={form}
